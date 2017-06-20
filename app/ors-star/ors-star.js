@@ -28,7 +28,7 @@
 				}
 
 				$scope.$watch('n', function () {
-					// console.log('watch', arguments);
+					console.log('watch2', arguments);
 					let note = $scope.n;
 					note = (note === undefined) ? 3 : note;
 					note = Number(note);
