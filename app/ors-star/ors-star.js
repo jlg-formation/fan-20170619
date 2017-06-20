@@ -7,32 +7,31 @@
 		return {
 			restrict: 'E',
 			scope: {
-				n: '=note'
+				n: '=?note'
 			},
-			// template: `<img ng-repeat="i in [1, 2, 3, 4, 5]" 
-			// 				ng-src="{{$ctrl.getImage(i)}}"
-			// 				alt="Etoile blanche">`,
 
-			controller: function OrsStarCtrl($scope, $element, $attrs) {
+			controller: function OrsStarCtrl($scope, $element, $attrs, $compile) {
 				'ngInject';
-				// this.getImage = function (i) {
-				// 	if (i > 3) {
-				// 		return './ors-star/img/white_star.png';
-				// 	}
-				// 	return './ors-star/img/yellow_star.png';
-				// }
+
+				$scope.update = (n) => {
+					console.log('update : ', n);
+					$scope.n = n;
+				}
+
 				$scope.$watch('n', function () {
+					console.log('watch', arguments);
 					let note = $scope.n;
 					note = (note === undefined) ? 3 : note;
 					note = Number(note);
 					note = (isNaN(note)) ? 3 : note;
-
+					note = (note > 5) ? 5 : note;
+					note = (note < 0) ? 0 : note;
 					let html = '';
 					for (var i = 0; i < note; i++) {
-						html += '<img src="./ors-star/img/yellow_star.png">';
+						html += '<img ng-click="update(' + (i + 1) + ')" src="./ors-star/img/yellow_star.png">';
 					}
 					for (var i = note; i < 5; i++) {
-						html += '<img src="./ors-star/img/white_star.png">';
+						html += `<img ng-click="update(${i + 1})" src="./ors-star/img/white_star.png">`;
 					}
 
 					$element.html(html);
@@ -40,6 +39,7 @@
 					console.log('$element.attr(note)', $element.attr('note'));
 					console.log('$attrs', $attrs);
 					console.log('$scope', $scope);
+					$compile($element.contents())($scope);
 				});
 			},
 			controllerAs: '$ctrl'
