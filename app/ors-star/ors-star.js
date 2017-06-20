@@ -10,7 +10,7 @@
 			// 				ng-src="{{$ctrl.getImage(i)}}"
 			// 				alt="Etoile blanche">`,
 
-			controller: function OrsStarCtrl($element) {
+			controller: function OrsStarCtrl($element, $attrs) {
 				'ngInject';
 				// this.getImage = function (i) {
 				// 	if (i > 3) {
@@ -27,6 +27,9 @@
 				}
 
 				$element.html(html);
+				console.log('$element', $element);
+				console.log('$element.attr(note)', $element.attr('note'));
+				console.log('$attrs', $attrs);
 			}, 
 			controllerAs: '$ctrl'
 		};
