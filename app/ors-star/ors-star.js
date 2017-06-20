@@ -3,23 +3,32 @@
 
 	var app = angular.module('ors-star', []);
 
+	app.run(function ($rootScope) {
+		'ngInject';
+		$rootScope.coucou = function () {
+			console.log('coucou !');
+		};
+	});
+
 	app.directive('orsStar', function () {
 		return {
 			restrict: 'E',
 			scope: {
-				n: '=?note'
+				n: '<?note',
+				verb: '&action'
 			},
 
 			controller: function OrsStarCtrl($scope, $element, $attrs, $compile) {
 				'ngInject';
 
 				$scope.update = (n) => {
-					console.log('update : ', n);
+					// console.log('update : ', n);
 					$scope.n = n;
+					$scope.verb();
 				}
 
 				$scope.$watch('n', function () {
-					console.log('watch', arguments);
+					// console.log('watch', arguments);
 					let note = $scope.n;
 					note = (note === undefined) ? 3 : note;
 					note = Number(note);
@@ -35,10 +44,10 @@
 					}
 
 					$element.html(html);
-					console.log('$element', $element);
-					console.log('$element.attr(note)', $element.attr('note'));
-					console.log('$attrs', $attrs);
-					console.log('$scope', $scope);
+					// console.log('$element', $element);
+					// console.log('$element.attr(note)', $element.attr('note'));
+					// console.log('$attrs', $attrs);
+					// console.log('$scope', $scope);
 					$compile($element.contents())($scope);
 				});
 			},
