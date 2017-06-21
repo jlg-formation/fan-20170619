@@ -1,10 +1,11 @@
 import 'angular';
 
 import './ors-star/ors-star.js';
+import './ors-route/ors-route.js';
 import 'angular/angular-csp.css';
 import './style.scss';
 
-var app = angular.module('main', ['ors-star']);
+const app = angular.module('main', ['ors-star', 'ors-route']);
 
 app.directive('orsHeader', function () {
     return {
