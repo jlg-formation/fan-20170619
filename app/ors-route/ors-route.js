@@ -7,6 +7,8 @@ import produitsUrl from './tmpl/produits.html';
 import servicesUrl from './tmpl/services.html';
 import contactUrl from './tmpl/contact.html';
 
+import {ProductCtrl} from './ProductCtrl.js';
+
 app.config(function ($locationProvider, $urlRouterProvider, $stateProvider) {
 
 	$locationProvider
@@ -22,7 +24,9 @@ app.config(function ($locationProvider, $urlRouterProvider, $stateProvider) {
 	const produitsState = {
 		name: 'produits',
 		url: '/produits',
-		template: produitsUrl
+		template: produitsUrl,
+		controller: ProductCtrl,
+		controllerAs: '$ctrl'
 	}
 
 	const servicesState = {
